@@ -1,0 +1,1 @@
+/usr/bin/c++  -march=native -g -O0 -march=native -O3 -DNDEBUG CMakeFiles/ankle_test.dir/src/test/ankle_test.cc.o -o ankle_test
