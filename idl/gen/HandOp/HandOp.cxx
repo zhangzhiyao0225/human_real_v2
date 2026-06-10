@@ -36,11 +36,11 @@ using namespace eprosima::fastcdr::exception;
 
 Linear3D::Linear3D()
 {
-    // m_x com.eprosima.idl.parser.typecode.PrimitiveTypeCode@757942a1
+    // m_x com.eprosima.idl.parser.typecode.PrimitiveTypeCode@8646db9
     m_x = 0.0;
-    // m_y com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4a87761d
+    // m_y com.eprosima.idl.parser.typecode.PrimitiveTypeCode@37374a5e
     m_y = 0.0;
-    // m_z com.eprosima.idl.parser.typecode.PrimitiveTypeCode@66d1af89
+    // m_z com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4671e53b
     m_z = 0.0;
 
 }
@@ -274,11 +274,11 @@ void Linear3D::serializeKey(
 
 Angular3D::Angular3D()
 {
-    // m_x com.eprosima.idl.parser.typecode.PrimitiveTypeCode@43bd930a
+    // m_x com.eprosima.idl.parser.typecode.PrimitiveTypeCode@553a3d88
     m_x = 0.0;
-    // m_y com.eprosima.idl.parser.typecode.PrimitiveTypeCode@33723e30
+    // m_y com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7a30d1e6
     m_y = 0.0;
-    // m_z com.eprosima.idl.parser.typecode.PrimitiveTypeCode@64f6106c
+    // m_z com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5891e32e
     m_z = 0.0;
 
 }
@@ -512,9 +512,9 @@ void Angular3D::serializeKey(
 
 Twist::Twist()
 {
-    // m_linear com.eprosima.fastdds.idl.parser.typecode.StructTypeCode@40f08448
+    // m_linear com.eprosima.fastdds.idl.parser.typecode.StructTypeCode@33b37288
 
-    // m_angular com.eprosima.fastdds.idl.parser.typecode.StructTypeCode@276438c9
+    // m_angular com.eprosima.fastdds.idl.parser.typecode.StructTypeCode@77a57272
 
 
 }
@@ -716,7 +716,7 @@ void Twist::serializeKey(
 
 ActCmd::ActCmd()
 {
-    // m_act com.eprosima.idl.parser.typecode.PrimitiveTypeCode@d6da883
+    // m_act com.eprosima.idl.parser.typecode.PrimitiveTypeCode@49c43f4e
     m_act = 0;
 
 }
@@ -862,7 +862,7 @@ void ActCmd::serializeKey(
 
 RobotNotification::RobotNotification()
 {
-    // m_data com.eprosima.idl.parser.typecode.StringTypeCode@2d127a61
+    // m_data com.eprosima.idl.parser.typecode.StringTypeCode@70beb599
     m_data ="";
 
 }

@@ -1,4 +1,4 @@
-#include "efc_imu.h"
+#include "device/efc_imu.h"
 
 #include <Eigen/Geometry>
 

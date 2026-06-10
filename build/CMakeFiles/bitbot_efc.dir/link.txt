@@ -1,2 +1,0 @@
-/usr/bin/ar qc libbitbot_efc.a CMakeFiles/bitbot_efc.dir/src/efc/device/efc_imu.cc.o CMakeFiles/bitbot_efc.dir/src/efc/device/efc_joint.cc.o CMakeFiles/bitbot_efc.dir/src/efc/bus/efc_bus.cc.o
-/usr/bin/ranlib libbitbot_efc.a

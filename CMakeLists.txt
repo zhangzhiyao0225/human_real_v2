@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.20)
-project(bitbot_efc)
+project(bitbot_mc)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_BUILD_TYPE Debug)
-# set(CMAKE_BUILD_TYPE Release)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -g -O0")
+# set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE Release)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native")
 
 include(idlgen.cmake)
 
@@ -24,7 +24,7 @@ find_package(fastrtps REQUIRED)
 # set(IDL_DIR "${CMAKE_CURRENT_SOURCE_DIR}/idl")
 # file(GLOB IDLs "${IDL_DIR}/*") 
 # foreach(SUBDIR ${IDLs})
-# 	Aux_source_directory(${SUBDIR} DDS_SOURCCES_SUBDIR)
+# 	aux_source_directory(${SUBDIR} DDS_SOURCCES_SUBDIR)
 #        	list(APPEND EFC_DDS_SOURCES ${DDS_SOURCCES_SUBDIR})
 #         list(APPEND EFC_DDS_INCLUDES ${SUBDIR})
 # endforeach()
@@ -32,7 +32,7 @@ find_package(fastrtps REQUIRED)
 #   ${EFC_DDS_SOURCES}
 #   ${EFC_DDS_INCLUDES}
 # )
-target_link_libraries(efc_dds_lib fastrtps fastcdr)
+# target_link_libraries(${BITBOT_TYPE}_dds_lib fastrtps fastcdr)
 
 # Bitbot EFC Library
 
@@ -70,7 +70,7 @@ target_include_directories(${BITBOT_LIB_NAME} PUBLIC $<BUILD_INTERFACE:${THIRD_P
   )
 
 target_link_libraries(${BITBOT_LIB_NAME} BitbotKernel 
-  efc_dds_lib
+  ${BITBOT_TYPE}_dds_lib
 )
 
 # Bitbot main app
@@ -118,10 +118,10 @@ if(BUILD_TEST)
   )
 
   add_executable(pub_test src/test/pub_test.cc)
-  target_link_libraries(pub_test efc_dds_lib)
+  target_link_libraries(pub_test ${BITBOT_TYPE}_dds_lib)
 
   add_executable(sub_test src/test/sub_test.cc)
-  target_link_libraries(sub_test efc_dds_lib)
+  target_link_libraries(sub_test ${BITBOT_TYPE}_dds_lib)
 
   add_executable(ankle_test src/test/ankle_test.cc)
 endif()

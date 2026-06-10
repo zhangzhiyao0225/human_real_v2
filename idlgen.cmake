@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
-project(bitbot_efc)
+project(bitbot_mc)
+
+include(options.cmake)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 20)
@@ -36,120 +38,30 @@ foreach(IDL ${IDLs})
   set(IDL_OUT_HPP "${CUR_IDL_SRC_DIR}/${IDL_NAME}.h")
   set(IDL_OUT_PUBSUB_CPP "${CUR_IDL_SRC_DIR}/${IDL_NAME}PubSubTypes.cxx")
   set(IDL_OUT_PUBSUB_HPP "${CUR_IDL_SRC_DIR}/${IDL_NAME}PubSubTypes.h")
-  add_custom_command(
-        OUTPUT ${IDL_OUT_CPP} ${IDL_OUT_HPP} ${IDL_OUT_PUBSUB_CPP} ${IDL_OUT_PUBSUB_HPP}
+  # if (NOT EXISTS ${IDL_OUT_CPP})
+    add_custom_command(
+          OUTPUT ${IDL_OUT_CPP} ${IDL_OUT_HPP} ${IDL_OUT_PUBSUB_CPP} ${IDL_OUT_PUBSUB_HPP}
 
-        COMMAND ${IDL_COMPILER} -typeros2 -d ${CUR_IDL_SRC_DIR} ${IDL}
-                # --cpp_out ${IDL_PATH}
+          COMMAND ${IDL_COMPILER} -typeros2 ${IDL} -d ${CUR_IDL_SRC_DIR}
+                  # --cpp_out ${IDL_PATH}
 
-        DEPENDS ${IDL}
+          DEPENDS ${IDL}
 
-        COMMENT "Generating C++ from ${IDL}"
+          COMMENT "Generating C++ from ${IDL}"
 
-        VERBATIM
-    )
+          VERBATIM
+      )
+  # endif(NOT EXISTS ${IDL_OUT_CPP})
   
-  Aux_source_directory(${CUR_IDL_SRC_DIR} DDS_SOURCCES_SUBDIR)
-  list(APPEND EFC_DDS_SOURCES ${DDS_SOURCCES_SUBDIR})
+  list(APPEND EFC_DDS_SOURCES ${IDL_OUT_CPP} ${IDL_OUT_HPP} ${IDL_OUT_PUBSUB_CPP} ${IDL_OUT_PUBSUB_HPP})
   list(APPEND EFC_DDS_INCLUDES ${CUR_IDL_SRC_DIR})
 
-    # list(APPEND EFC_DDS_SOURCES ${OUT_CPP})
-    # list(APPEND EFC_DDS_INCLUDES ${OUT_HPP})
-
-    # add_custom_command(
-	# 	OUTPUT ${IDL_DIR}/${IDL_NAME}PubSubTypes.h
-	# 	COMMAND ${IDL_COMPILER} ${IDL}
-	# )
 endforeach(IDL)
-message(STATUS "Generating DDS source ${EFC_DDS_SOURCES}")
-message(STATUS "Generating DDS include ${EFC_DDS_INCLUDES}")
+# message(STATUS "Generating DDS source ${EFC_DDS_SOURCES}")
+# message(STATUS "Generating DDS include ${EFC_DDS_INCLUDES}")
 
-# foreach(SUBDIR ${IDLs})
-# 	
-# endforeach()
-add_library(efc_dds_lib
+add_library(${BITBOT_TYPE}_dds_lib
   ${EFC_DDS_SOURCES}
   ${EFC_DDS_INCLUDES}
 )
-target_link_libraries(efc_dds_lib fastrtps fastcdr)
-return()
-
-# Bitbot EFC Library
-
-set(BITBOT_DEPENDENCY_USE_PROXY TRUE)
-set(BITBOT_DEPENDENCY_USE_LOCAL_FILE TRUE)
-#set(BITBOT_DEPENDENCY_LOCAL_FILE_PATH ${CMAKE_SOURCE_DIR}/dependencies)
-#include(dependencies/bitbot.cmake)
-#BitbotAddDependency(
-#  NAME           bitbot_kernel
-#  FILE_NAME      "bitbot_kernel-main.zip"
-#  FILE_PATH      ${BITBOT_DEPENDENCY_LOCAL_FILE_PATH}
-#  USE_LOCAL_FILE TRUE
-#)
-
-find_package(yaml-cpp REQUIRED)
-include_directories("/usr/include/eigen3")
-
-SET(BITBOT_SOURCE_DIR ${BITBOT_SRC_ROOT_DIR}/${BITBOT_TYPE})
-aux_source_directory(${BITBOT_SOURCE_DIR}/device BITBOT_EFC_DEVICE_SRC)
-aux_source_directory(${BITBOT_SOURCE_DIR}/bus BITBOT_EFC_BUS_SRC)
-set(BITBOT_EFC_SRC
-  ${BITBOT_EFC_DEVICE_SRC}
-  ${BITBOT_EFC_BUS_SRC}
-  ${BITBOT_EFC_KERNEL_SRC}
-  ${BITBOT_CURRENT_FRONTEND_SRC_DIR}
-)
-
-add_library(${BITBOT_LIB_NAME} ${BITBOT_EFC_SRC})
-target_include_directories(${BITBOT_LIB_NAME} PUBLIC $<BUILD_INTERFACE:${THIRD_PARTY_INCLUDE}> $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:include>
-  ${IDL_GEN_INC_DIR}
-  ${BITBOT_INCLUDES}
-  ${BITBOT_KERNEL_INCLUDE_DIR}
-  ${GLAZE_INCLUDE_DIR}
-  ${BITBOT_CURRENT_FRONTEND_INC_DIR}
-  )
-
-# Bitbot main app
-# FIXME: removed by xky
-# include(FetchContent)
-# FetchContent_Declare(
-#   ovinf
-#   GIT_REPOSITORY https://github.com/Dknt0/ovinf.git 
-#   GIT_TAG main
-# )
-# FetchContent_MakeAvailable(ovinf)
-
-include(thirdparties.cmake)
-
-
-list(APPEND CMAKE_PREFIX_PATH "${PROJECT_SOURCE_DIR}/src/mj/src/custom_msgs/install")
-list(APPEND CMAKE_PREFIX_PATH "${OPENVINO_ROOT_DIR}/cmake")
-
-find_package(OpenVINO REQUIRED)
-
-add_executable(${BITBOT_APP_NAME} main.cc)
-
-target_include_directories(${BITBOT_APP_NAME} PUBLIC
-  include
-  ${BITBOT_INCLUDES}
-  ${OVINF_INCLUDE_DIR}
-  ${OPENVINO_INCLUDE_DIR}
-  ${CONCURRENTQUEUE_INCLUDE_DIR}
-  ${BITBOT_ROS_INC_DIR}
-)
-
-target_link_libraries(${BITBOT_APP_NAME}
-  ${BITBOT_LIB_NAME}
-  ovinf
-  ${BITBOT_ROS_LIBS}
-)
-
-# Tests
-set(BUILD_TEST ON)
-if(BUILD_TEST)
-  include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
-    ${BITBOT_INCLUDES}
-    ${IDL_GEN_INC_DIR}
-  )
-endif()
+target_link_libraries(${BITBOT_TYPE}_dds_lib fastrtps fastcdr)

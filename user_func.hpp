@@ -10,10 +10,6 @@
 #include <memory>
 #include <unordered_map>
 
-// #include "ovinf/controller/init_pos.hpp"
-// #include "ovinf/controller/policy_controller_factory.hpp"
-// #include "ovinf/robot/efc_common.h"
-// #include "ovinf/robot/robot_efc.hpp"
 
 #include "controller/init_pos.hpp"
 #include "controller/policy_controller_factory.hpp"
@@ -29,6 +25,8 @@ enum Events
   EnableStandingPolicy,
   EnableWarkingPolicy,
   EnableRobustPolicy,
+  EnableWaveGreeting,
+  EnableHandshakePolicy,
   // EnableLocomotion21Policy,
   PolicySwitch,
 
@@ -65,7 +63,9 @@ static std::unordered_map<bitbot::EventValue, bitbot::EventId> s_key_2_evts =
         {3, static_cast<bitbot::EventId>(Events::EnableStandingPolicy)},
         {4, static_cast<bitbot::EventId>(Events::EnableWarkingPolicy)},
         {5, static_cast<bitbot::EventId>(Events::EnableRobustPolicy)},
-        // {6, static_cast<bitbot::EventId>(Events::EnableLocomotion21Policy)},
+        {6, static_cast<bitbot::EventId>(Events::EnableWaveGreeting)},
+        {7, static_cast<bitbot::EventId>(Events::EnableHandshakePolicy)},
+        // {8, static_cast<bitbot::EventId>(Events::EnableLocomotion21Policy)},
 };
 
 static bitbot::bitbot_init_param s_initparam = {
@@ -85,7 +85,10 @@ public:
       : kernel_(kernel_config, s_initparam)
   {
 
-    logger_ = bitbot::Logger().ConsoleLogger();
+    // logger_ = bitbot::Logger().ConsoleLogger();
+    // logger_ = bitbot::Logger().FileloggerInit();
+    logger_ = bitbot::Logger().CreateFileLogger("mc");
+
     YAML::Node config = YAML::LoadFile(controller_config);
 
     switching_time_ = config["RobotConfig"]["switching_time"].as<double>();
@@ -107,6 +110,14 @@ public:
             robot_, config["RobotConfig"]["policy_walking"]);
     robust_controller_ = ovinf::PolicyControllerFactory::CreatePolicyController(
         robot_, config["RobotConfig"]["policy_robust"]);
+    wave_greeting_controller_ =
+        ovinf::PolicyControllerFactory::CreatePolicyController(
+            robot_, config["RobotConfig"]["policy_standing"],
+            config["RobotConfig"]["traditional_wave"]);
+    handshake_controller_ =
+        ovinf::PolicyControllerFactory::CreatePolicyController(
+            robot_, config["RobotConfig"]["policy_standing"],
+            config["RobotConfig"]["traditional_handshake"]);
     // locomotion21_controller_ = ovinf::PolicyControllerFactory::CreatePolicyController(
     //     robot_, config["RobotConfig"]["policy_robust"]);
     current_policy_controller_ = standing_controller_;
@@ -127,7 +138,7 @@ public:
         "init_pose", static_cast<bitbot::EventId>(Events::InitPose),
         [this](bitbot::EventValue, UserData &)
         {
-          std::cout << "proc InitPose 1001 event" << std::endl;
+          // std::cout << "proc InitPose 1001 event" << std::endl;
           init_pos_controller_->Init();
           return static_cast<bitbot::StateId>(States::InitPose);
         });
@@ -197,6 +208,39 @@ public:
             target_policy_controller_->Init();
             return static_cast<bitbot::StateId>(States::PolicySwitching);
           }
+        });
+
+
+    kernel_.RegisterEvent(
+        "enable_wave_greeting",
+        static_cast<bitbot::EventId>(Events::EnableWaveGreeting),
+        [this](bitbot::EventValue, UserData &)
+        {
+          if (current_policy_controller_ == wave_greeting_controller_)
+          {
+            logger_->warn("Wave greeting is already enabled");
+            return static_cast<bitbot::StateId>(States::PolicyRunning);
+          }
+          logger_->info("Enabling wave greeting");
+          target_policy_controller_ = wave_greeting_controller_;
+          target_policy_controller_->Init();
+          return static_cast<bitbot::StateId>(States::PolicySwitching);
+        });
+
+    kernel_.RegisterEvent(
+        "enable_handshake_policy",
+        static_cast<bitbot::EventId>(Events::EnableHandshakePolicy),
+        [this](bitbot::EventValue, UserData &)
+        {
+          if (current_policy_controller_ == handshake_controller_)
+          {
+            logger_->warn("Handshake policy is already enabled");
+            return static_cast<bitbot::StateId>(States::PolicyRunning);
+          }
+          logger_->info("Enabling handshake policy");
+          target_policy_controller_ = handshake_controller_;
+          target_policy_controller_->Init();
+          return static_cast<bitbot::StateId>(States::PolicySwitching);
         });
 
     kernel_.RegisterEvent(
@@ -324,23 +368,11 @@ public:
           command_[0] = value->linear().x();
           command_[1] = value->linear().y();
           command_[2] = value->angular().z();
-          std::cout << "set_vel_all: " << command_[0] << " " << command_[1] << " " << command_[2] << std::endl;
+          // std::cout << "set_vel_all: " << command_[0] << " " << command_[1] << " " << command_[2] << std::endl;
           // logger_->info("current velocity: x={} y={} w={}", command_[0],
           //               command_[1], command_[2]);
           return std::nullopt;
         });
-
-    // kernel_.RegisterEvent(
-    //     "action_cmd", static_cast<bitbot::EventId>(Events::ActionCommand),
-    //     [this](bitbot::EventValue key_state, UserData &user_data)
-    //     {
-    //       // do nothing
-    //       assert(0);
-    //       bitbot::EventId action = (bitbot::EventId)key_state;
-    //       std::cout << "action_cmd: " << action << s_key_2_evts[action] << std::endl;
-    //       kernel_.HandleRobotEvent(std::make_pair(s_key_2_evts[action], 0));
-    //       return std::nullopt;
-    //     });
 
     // State
     kernel_.RegisterState(
@@ -382,7 +414,7 @@ public:
         [this](const bitbot::KernelInterface &kernel,
                Kernel::ExtraData &extra_data, UserData &user_data)
         {
-          std::cout << "policy running state" << std::endl;
+          // std::cout << "policy running state" << std::endl;
           robot_->Observer()->Update();
           current_policy_controller_->GetCommand() = command_;
           current_policy_controller_->Step();
@@ -402,6 +434,8 @@ public:
             Events::EnableStandingPolicy,
             Events::EnableWarkingPolicy,
             Events::EnableRobustPolicy,
+            Events::EnableWaveGreeting,
+            Events::EnableHandshakePolicy,
             // Events::EnableLocomotion21Policy,
             static_cast<bitbot::EventId>(bitbot::KernelEvent::STOP),
         });
@@ -462,6 +496,8 @@ private:
   ovinf::PolicyControllerBase::Ptr standing_controller_ = nullptr;
   ovinf::PolicyControllerBase::Ptr walking_controller_ = nullptr;
   ovinf::PolicyControllerBase::Ptr robust_controller_ = nullptr;
+  ovinf::PolicyControllerBase::Ptr wave_greeting_controller_ = nullptr;
+  ovinf::PolicyControllerBase::Ptr handshake_controller_ = nullptr;
   // ovinf::PolicyControllerBase::Ptr locomotion21_controller_ = nullptr;
   ovinf::PolicyControllerBase::Ptr current_policy_controller_ = nullptr;
   ovinf::PolicyControllerBase::Ptr target_policy_controller_ = nullptr;

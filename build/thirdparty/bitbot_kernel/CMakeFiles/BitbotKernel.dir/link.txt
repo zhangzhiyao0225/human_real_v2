@@ -1,2 +1,0 @@
-/usr/bin/ar qc libBitbotKernel.a CMakeFiles/BitbotKernel.dir/src/kernel/backend.cpp.o CMakeFiles/BitbotKernel.dir/src/kernel/config_parser.cpp.o CMakeFiles/BitbotKernel.dir/src/utils/cpu_affinity.c.o CMakeFiles/BitbotKernel.dir/src/utils/logger.cpp.o CMakeFiles/BitbotKernel.dir/src/utils/priority.c.o CMakeFiles/BitbotKernel.dir/src/utils/realtime.cpp.o CMakeFiles/BitbotKernel.dir/src/utils/time_func.c.o
-/usr/bin/ranlib libBitbotKernel.a

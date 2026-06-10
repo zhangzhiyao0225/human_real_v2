@@ -36,19 +36,19 @@ using namespace eprosima::fastcdr::exception;
 
 AlarmState::AlarmState()
 {
-    // m_motor_overtemp com.eprosima.idl.parser.typecode.ArrayTypeCode@4e718207
+    // m_motor_overtemp com.eprosima.idl.parser.typecode.ArrayTypeCode@7403c468
     memset(&m_motor_overtemp, 0, (24) * 1);
-    // m_motor_comm_error com.eprosima.idl.parser.typecode.ArrayTypeCode@1d371b2d
+    // m_motor_comm_error com.eprosima.idl.parser.typecode.ArrayTypeCode@43738a82
     memset(&m_motor_comm_error, 0, (24) * 1);
-    // m_motor_overcurrent com.eprosima.idl.parser.typecode.ArrayTypeCode@543c6f6d
+    // m_motor_overcurrent com.eprosima.idl.parser.typecode.ArrayTypeCode@c81cdd1
     memset(&m_motor_overcurrent, 0, (24) * 1);
-    // m_battery_low com.eprosima.idl.parser.typecode.PrimitiveTypeCode@13eb8acf
+    // m_battery_low com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1fc2b765
     m_battery_low = false;
-    // m_imu_error com.eprosima.idl.parser.typecode.PrimitiveTypeCode@51c8530f
+    // m_imu_error com.eprosima.idl.parser.typecode.PrimitiveTypeCode@75881071
     m_imu_error = false;
-    // m_system_fault com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7403c468
+    // m_system_fault com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2a70a3d8
     m_system_fault = false;
-    // m_error_code com.eprosima.idl.parser.typecode.PrimitiveTypeCode@43738a82
+    // m_error_code com.eprosima.idl.parser.typecode.PrimitiveTypeCode@289d1c02
     m_error_code = 0;
 
 }
@@ -489,49 +489,49 @@ void AlarmState::serializeKey(
 
 MotorState::MotorState()
 {
-    // m_CanId com.eprosima.idl.parser.typecode.PrimitiveTypeCode@706a04ae
+    // m_CanId com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5c072e3f
     m_CanId = 0;
-    // m_EtherCatId com.eprosima.idl.parser.typecode.PrimitiveTypeCode@67b467e9
+    // m_EtherCatId com.eprosima.idl.parser.typecode.PrimitiveTypeCode@149494d8
     m_EtherCatId = 0;
-    // m_ModelId com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4d1b0d2a
+    // m_ModelId com.eprosima.idl.parser.typecode.PrimitiveTypeCode@481a15ff
     m_ModelId = 0;
-    // m_Direction com.eprosima.idl.parser.typecode.PrimitiveTypeCode@954b04f
+    // m_Direction com.eprosima.idl.parser.typecode.PrimitiveTypeCode@78186a70
     m_Direction = 0;
-    // m_JointMode com.eprosima.idl.parser.typecode.PrimitiveTypeCode@149494d8
+    // m_JointMode com.eprosima.idl.parser.typecode.PrimitiveTypeCode@306279ee
     m_JointMode = 0;
-    // m_CurrentVelocity com.eprosima.idl.parser.typecode.PrimitiveTypeCode@710726a3
+    // m_CurrentVelocity com.eprosima.idl.parser.typecode.PrimitiveTypeCode@545997b1
     m_CurrentVelocity = 0.0;
-    // m_TargetVelocity com.eprosima.idl.parser.typecode.PrimitiveTypeCode@646007f4
+    // m_TargetVelocity com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4cf4d528
     m_TargetVelocity = 0.0;
-    // m_CurrentPosition com.eprosima.idl.parser.typecode.PrimitiveTypeCode@481a15ff
+    // m_CurrentPosition com.eprosima.idl.parser.typecode.PrimitiveTypeCode@77846d2c
     m_CurrentPosition = 0.0;
-    // m_TargetPosition com.eprosima.idl.parser.typecode.PrimitiveTypeCode@78186a70
+    // m_TargetPosition com.eprosima.idl.parser.typecode.PrimitiveTypeCode@548ad73b
     m_TargetPosition = 0.0;
-    // m_CurrentCurrent com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4cf4d528
+    // m_CurrentCurrent com.eprosima.idl.parser.typecode.PrimitiveTypeCode@727803de
     m_CurrentCurrent = 0.0;
-    // m_TargetCurrent com.eprosima.idl.parser.typecode.PrimitiveTypeCode@77846d2c
+    // m_TargetCurrent com.eprosima.idl.parser.typecode.PrimitiveTypeCode@704921a5
     m_TargetCurrent = 0.0;
-    // m_TargetTorque com.eprosima.idl.parser.typecode.PrimitiveTypeCode@548ad73b
+    // m_TargetTorque com.eprosima.idl.parser.typecode.PrimitiveTypeCode@df27fae
     m_TargetTorque = 0.0;
-    // m_Kp com.eprosima.idl.parser.typecode.PrimitiveTypeCode@727803de
+    // m_Kp com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2f0a87b3
     m_Kp = 0.0;
-    // m_Kd com.eprosima.idl.parser.typecode.PrimitiveTypeCode@704921a5
+    // m_Kd com.eprosima.idl.parser.typecode.PrimitiveTypeCode@319b92f3
     m_Kd = 0.0;
-    // m_CurrentLimit com.eprosima.idl.parser.typecode.PrimitiveTypeCode@df27fae
+    // m_CurrentLimit com.eprosima.idl.parser.typecode.PrimitiveTypeCode@fcd6521
     m_CurrentLimit = 0.0;
-    // m_MotorTemperature com.eprosima.idl.parser.typecode.PrimitiveTypeCode@24a35978
+    // m_MotorTemperature com.eprosima.idl.parser.typecode.PrimitiveTypeCode@27d415d9
     m_MotorTemperature = 0.0;
-    // m_DriverTemperature com.eprosima.idl.parser.typecode.PrimitiveTypeCode@16f7c8c1
+    // m_DriverTemperature com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5c18298f
     m_DriverTemperature = 0.0;
-    // m_SettingsAcc com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2f0a87b3
+    // m_SettingsAcc com.eprosima.idl.parser.typecode.PrimitiveTypeCode@31f924f5
     m_SettingsAcc = 0.0;
-    // m_SettingsMagLinkGain com.eprosima.idl.parser.typecode.PrimitiveTypeCode@319b92f3
+    // m_SettingsMagLinkGain com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5579bb86
     m_SettingsMagLinkGain = 0.0;
-    // m_SettingsDisturbComp com.eprosima.idl.parser.typecode.PrimitiveTypeCode@fcd6521
+    // m_SettingsDisturbComp com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5204062d
     m_SettingsDisturbComp = 0.0;
-    // m_Settings_FB_KP com.eprosima.idl.parser.typecode.PrimitiveTypeCode@27d415d9
+    // m_Settings_FB_KP com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4fcd19b3
     m_Settings_FB_KP = 0.0;
-    // m_Settings_FB_KD com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5c18298f
+    // m_Settings_FB_KD com.eprosima.idl.parser.typecode.PrimitiveTypeCode@376b4233
     m_Settings_FB_KD = 0.0;
 
 }
@@ -1563,27 +1563,27 @@ void MotorState::serializeKey(
 
 IMUData::IMUData()
 {
-    // m_ImuId com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5fdba6f9
+    // m_ImuId com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5123a213
     m_ImuId = 0;
-    // m_Roll com.eprosima.idl.parser.typecode.PrimitiveTypeCode@10d59286
+    // m_Roll com.eprosima.idl.parser.typecode.PrimitiveTypeCode@52525845
     m_Roll = 0.0;
-    // m_Pitch com.eprosima.idl.parser.typecode.PrimitiveTypeCode@fe18270
+    // m_Pitch com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3b94d659
     m_Pitch = 0.0;
-    // m_Yaw com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6fb0d3ed
+    // m_Yaw com.eprosima.idl.parser.typecode.PrimitiveTypeCode@24b1d79b
     m_Yaw = 0.0;
-    // m_A_x com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6dde5c8c
+    // m_A_x com.eprosima.idl.parser.typecode.PrimitiveTypeCode@68ceda24
     m_A_x = 0.0;
-    // m_A_y com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5123a213
+    // m_A_y com.eprosima.idl.parser.typecode.PrimitiveTypeCode@281e3708
     m_A_y = 0.0;
-    // m_A_z com.eprosima.idl.parser.typecode.PrimitiveTypeCode@52525845
+    // m_A_z com.eprosima.idl.parser.typecode.PrimitiveTypeCode@35a50a4c
     m_A_z = 0.0;
-    // m_W_x com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3b94d659
+    // m_W_x com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1f021e6c
     m_W_x = 0.0;
-    // m_W_y com.eprosima.idl.parser.typecode.PrimitiveTypeCode@24b1d79b
+    // m_W_y com.eprosima.idl.parser.typecode.PrimitiveTypeCode@103f852
     m_W_y = 0.0;
-    // m_W_z com.eprosima.idl.parser.typecode.PrimitiveTypeCode@68ceda24
+    // m_W_z com.eprosima.idl.parser.typecode.PrimitiveTypeCode@587c290d
     m_W_z = 0.0;
-    // m_ImuTemp com.eprosima.idl.parser.typecode.PrimitiveTypeCode@281e3708
+    // m_ImuTemp com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4516af24
     m_ImuTemp = 0.0;
 
 }
@@ -2153,17 +2153,17 @@ void IMUData::serializeKey(
 
 RobotData::RobotData()
 {
-    // m_motors com.eprosima.idl.parser.typecode.ArrayTypeCode@797badd3
+    // m_motors com.eprosima.idl.parser.typecode.ArrayTypeCode@23a5fd2
 
-    // m_imu com.eprosima.idl.parser.typecode.ArrayTypeCode@221af3c0
+    // m_imu com.eprosima.idl.parser.typecode.ArrayTypeCode@551bdc27
 
-    // m_timestamp com.eprosima.idl.parser.typecode.PrimitiveTypeCode@62bd765
+    // m_timestamp com.eprosima.idl.parser.typecode.PrimitiveTypeCode@58fdd99
     m_timestamp = 0;
-    // m_battery_voltage com.eprosima.idl.parser.typecode.PrimitiveTypeCode@23a5fd2
+    // m_battery_voltage com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6b1274d2
     m_battery_voltage = 0.0;
-    // m_emergency_stop com.eprosima.idl.parser.typecode.PrimitiveTypeCode@78a2da20
+    // m_emergency_stop com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7bc1a03d
     m_emergency_stop = false;
-    // m_alarms com.eprosima.fastdds.idl.parser.typecode.StructTypeCode@dd3b207
+    // m_alarms com.eprosima.fastdds.idl.parser.typecode.StructTypeCode@70b0b186
 
 
 }

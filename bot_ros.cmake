@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(bitbot_efc)
+project(bitbot_mc)
 
 INCLUDE(options.cmake)
 

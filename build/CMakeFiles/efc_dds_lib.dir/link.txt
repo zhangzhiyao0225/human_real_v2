@@ -1,2 +1,0 @@
-/usr/bin/ar qc libefc_dds_lib.a CMakeFiles/efc_dds_lib.dir/idl/gen/HandOp/HandOp.cxx.o CMakeFiles/efc_dds_lib.dir/idl/gen/HandOp/HandOpPubSubTypes.cxx.o CMakeFiles/efc_dds_lib.dir/idl/gen/RobotData/RobotData.cxx.o CMakeFiles/efc_dds_lib.dir/idl/gen/RobotData/RobotDataPubSubTypes.cxx.o CMakeFiles/efc_dds_lib.dir/idl/gen/RobotRecvData/RobotRecvData.cxx.o CMakeFiles/efc_dds_lib.dir/idl/gen/RobotRecvData/RobotRecvDataPubSubTypes.cxx.o
-/usr/bin/ranlib libefc_dds_lib.a

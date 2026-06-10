@@ -183,8 +183,10 @@ namespace bitbot
 
         // Logger().ConsoleLogger()->info("will HandleEvents.");
         this->HandleEvents();
+        auto h1 = std::chrono::high_resolution_clock::now();
         // Logger().ConsoleLogger()->info("will KernelLoopTask.");
         this->KernelLoopTask();
+        auto h2 = std::chrono::high_resolution_clock::now();
         // Logger().ConsoleLogger()->info("will KernelPrivateLoopEndTask.");
         this->KernelPrivateLoopEndTask();
         // Logger().ConsoleLogger()->info("next loop.");
@@ -205,7 +207,10 @@ namespace bitbot
         }
         else
         {
-          Logger().ConsoleLogger()->warn("Kernel loop over time: {} us", elapsed);
+          auto d1 = std::chrono::duration_cast<std::chrono::microseconds>(h1 - this_time).count(),
+          d2 = std::chrono::duration_cast<std::chrono::microseconds>(h2 - h1).count(),
+          d3 = std::chrono::duration_cast<std::chrono::microseconds>(end_time - h2).count();
+          Logger().ConsoleLogger()->warn("Kernel loop over time: {} us, lost: {}, h1: {}, h2: {}, h3: {}", elapsed, elapsed / 2000, d1, d2, d3);
         }
       }
 

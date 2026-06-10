@@ -42,6 +42,7 @@ class InitPosController : public ControllerBase<float> {
       std::cerr << "InitPosController not ready" << std::endl;
       return;
     }
+
     auto current_time = std::chrono::high_resolution_clock::now();
     float ratio = std::min(
         float(1.0),
@@ -49,20 +50,6 @@ class InitPosController : public ControllerBase<float> {
             duration_);
 
     VectorT temp_target = start_pos_ + ratio * (init_pos_ - start_pos_);
-
-    // static int i = 0;
-    // if (++i == 44)
-    // {
-	  //   i = 0;
-
-	  //   std::cout << "init step, i, ratio/init/start/target: "<<ratio<<"/"<<init_pos_[0]<<"/"<<start_pos_[0]<<"/"<<temp_target[0] <<  " in " << __FILE__ << std::endl;
-    // }
-    // static int j = 0;
-    // if (j++ < 10)
-    // {
-	  //   std::cout << "init step, j, ratio/init/start/target: "<<ratio<<"/"<<init_pos_[0]<<"/"<<start_pos_[0]<<"/"<<temp_target[0] <<  " in " << __FILE__ << std::endl;
-    // }
-
 
     if (set_target) {
       robot_->Executor()->JointTargetPosition() = temp_target;

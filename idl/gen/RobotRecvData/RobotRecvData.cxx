@@ -36,27 +36,27 @@ using namespace eprosima::fastcdr::exception;
 
 MotorCommand::MotorCommand()
 {
-    // m_enable com.eprosima.idl.parser.typecode.PrimitiveTypeCode@52f759d7
+    // m_enable com.eprosima.idl.parser.typecode.PrimitiveTypeCode@33723e30
     m_enable = false;
-    // m_mode com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7cbd213e
+    // m_mode com.eprosima.idl.parser.typecode.PrimitiveTypeCode@64f6106c
     m_mode = 0;
-    // m_ModelId com.eprosima.idl.parser.typecode.PrimitiveTypeCode@192d3247
+    // m_ModelId com.eprosima.idl.parser.typecode.PrimitiveTypeCode@553a3d88
     m_ModelId = 0;
-    // m_TargetVelocity com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3ecd23d9
+    // m_TargetVelocity com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7a30d1e6
     m_TargetVelocity = 0.0;
-    // m_TargetPosition com.eprosima.idl.parser.typecode.PrimitiveTypeCode@569cfc36
+    // m_TargetPosition com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5891e32e
     m_TargetPosition = 0.0;
-    // m_TargetCurrent com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7a30d1e6
+    // m_TargetCurrent com.eprosima.idl.parser.typecode.PrimitiveTypeCode@28ac3dc3
     m_TargetCurrent = 0.0;
-    // m_TargetTorque com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5891e32e
+    // m_TargetTorque com.eprosima.idl.parser.typecode.PrimitiveTypeCode@32eebfca
     m_TargetTorque = 0.0;
-    // m_Kp com.eprosima.idl.parser.typecode.PrimitiveTypeCode@cb0ed20
+    // m_Kp com.eprosima.idl.parser.typecode.PrimitiveTypeCode@4e718207
     m_Kp = 0.0;
-    // m_Kd com.eprosima.idl.parser.typecode.PrimitiveTypeCode@8e24743
+    // m_Kd com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1d371b2d
     m_Kd = 0.0;
-    // m_CurrentLimit com.eprosima.idl.parser.typecode.PrimitiveTypeCode@74a10858
+    // m_CurrentLimit com.eprosima.idl.parser.typecode.PrimitiveTypeCode@543c6f6d
     m_CurrentLimit = 0.0;
-    // m_action com.eprosima.idl.parser.typecode.PrimitiveTypeCode@23fe1d71
+    // m_action com.eprosima.idl.parser.typecode.PrimitiveTypeCode@13eb8acf
     m_action = 0;
 
 }
@@ -626,19 +626,19 @@ void MotorCommand::serializeKey(
 
 ForceTorqueData::ForceTorqueData()
 {
-    // m_enable com.eprosima.idl.parser.typecode.PrimitiveTypeCode@42607a4f
+    // m_enable com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7276c8cd
     m_enable = false;
-    // m_force_x com.eprosima.idl.parser.typecode.PrimitiveTypeCode@782663d3
+    // m_force_x com.eprosima.idl.parser.typecode.PrimitiveTypeCode@544a2ea6
     m_force_x = 0.0;
-    // m_force_y com.eprosima.idl.parser.typecode.PrimitiveTypeCode@1990a65e
+    // m_force_y com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2e3fc542
     m_force_y = 0.0;
-    // m_force_z com.eprosima.idl.parser.typecode.PrimitiveTypeCode@64485a47
+    // m_force_z com.eprosima.idl.parser.typecode.PrimitiveTypeCode@150c158
     m_force_z = 0.0;
-    // m_torque_x com.eprosima.idl.parser.typecode.PrimitiveTypeCode@7276c8cd
+    // m_torque_x com.eprosima.idl.parser.typecode.PrimitiveTypeCode@10dba097
     m_torque_x = 0.0;
-    // m_torque_y com.eprosima.idl.parser.typecode.PrimitiveTypeCode@401e7803
+    // m_torque_y com.eprosima.idl.parser.typecode.PrimitiveTypeCode@2eda0940
     m_torque_y = 0.0;
-    // m_torque_z com.eprosima.idl.parser.typecode.PrimitiveTypeCode@10dba097
+    // m_torque_z com.eprosima.idl.parser.typecode.PrimitiveTypeCode@3578436e
     m_torque_z = 0.0;
 
 }
@@ -1040,15 +1040,15 @@ void ForceTorqueData::serializeKey(
 
 RobotControlCommand::RobotControlCommand()
 {
-    // m_motors com.eprosima.idl.parser.typecode.ArrayTypeCode@37574691
+    // m_motors com.eprosima.idl.parser.typecode.ArrayTypeCode@80ec1f8
 
-    // m_force com.eprosima.idl.parser.typecode.ArrayTypeCode@25359ed8
+    // m_force com.eprosima.idl.parser.typecode.ArrayTypeCode@1445d7f
 
-    // m_emergency_stop com.eprosima.idl.parser.typecode.PrimitiveTypeCode@21a947fe
+    // m_emergency_stop com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6a396c1e
     m_emergency_stop = false;
-    // m_power_on com.eprosima.idl.parser.typecode.PrimitiveTypeCode@5606c0b
+    // m_power_on com.eprosima.idl.parser.typecode.PrimitiveTypeCode@6c3f5566
     m_power_on = false;
-    // m_timestamp com.eprosima.idl.parser.typecode.PrimitiveTypeCode@80ec1f8
+    // m_timestamp com.eprosima.idl.parser.typecode.PrimitiveTypeCode@12405818
     m_timestamp = 0;
 
 }
